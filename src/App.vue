@@ -4,10 +4,10 @@
       router-link(to="/")
         |Home
       |&nbsp;|&nbsp;
-      router-link(to="/about")
-        |About
+      router-link(to="/profile")
+        |Profile
     keep-alive
-      router-view
+        router-view
 </template>
 
 
@@ -30,4 +30,36 @@
     }
   }
 }
+
+
+
+
+
+
+
+
+
+// transition styles
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+
+
+
+.slide-left-enter-active, .slide-left-leave-active {
+  transition: .5s;
+  opacity: 1;
+  transform: translateX(0%) scaleY(1);
+}
+.slide-left-enter, .slide-left-leave-to {
+  transition: .5s;
+  opacity: 0;
+  transform: translateX(-100%) scaleY(0);
+}
+
 </style>
