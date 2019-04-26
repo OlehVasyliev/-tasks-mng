@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # tasks-mng
 
 ## Project setup
@@ -27,3 +28,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+=======
+# -tasks-mng
+ Vue.js task management application
+>>>>>>> b72e65fddd39d739d62b6dbe964616249b26200c
