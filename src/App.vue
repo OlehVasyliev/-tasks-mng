@@ -10,6 +10,36 @@
         router-view
 </template>
 
+<script>
+const axios = require('axios');
+export default {
+  name: 'app',
+  mounted: function () {
+    axios.get('http://f.code-on.be/d/19/04/tasks.json')
+        .then(
+            response => (
+              this.$store.state.taskList = response.data
+            ),
+	          error => { alert(error) }
+
+        )
+        .catch(function() {
+        }.bind(this));
+
+    axios.get('http://f.code-on.be/d/19/04/owners.json')
+        .then(
+            response => (
+              this.$store.state.userList = response.data
+            ),
+	          error => { alert(error) }
+        )
+        .catch(function() {
+        }.bind(this));      
+                
+  }
+};
+</script>
+
 
 
 <style lang="scss">

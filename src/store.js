@@ -7,8 +7,5 @@ export default new Vuex.Store({
   state: {
     taskList: [],
     userList: []
-  },
-  actions: {
-
-  },
+  }
 });

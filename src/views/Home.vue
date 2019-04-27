@@ -1,15 +1,16 @@
 <template lang="pug">
   .home
-    //- TaskList(:taskList="taskList" :userList="this.userList")
-    TaskList
-    ReadyTask
+    .home__content
+      TaskList(:taskList="this.taskList")
+      TaskList(:taskList="this.taskList" onlyCompleted="true")
+    .home__content
+      UserList(:userList="this.userList" :taskList="this.taskList")
 </template>
 
 <script>
-// @ is an alias to /src
 import TaskList from '@/components/TaskList.vue';
-import ReadyTask from '@/components/ReadyTask.vue';
 import UserList from '@/components/UserList.vue';
+import { log } from 'util';
 
 
 const axios = require('axios');
@@ -17,73 +18,54 @@ export default {
   name: 'home',
   components: {
     TaskList,
-    ReadyTask,
     UserList
-  },
-  data() {
-    return {
-      userList: new Array
-    }
   },
   computed: {
     taskList() {
       return this.$store.state.taskList 
+    },
+    userList() {
+      return this.$store.state.userList 
     }
-  },
-  methods: {
-  },
-  created: function () {
-    axios.get('http://f.code-on.be/d/19/04/tasks.json')
-        .then(
-            response => (
-              this.$store.state.taskList = response.data
-              
-            )
-
-        )
-        .catch(function() {
-        }.bind(this));
-        console.log(this.$store.state.taskList),
-
-    axios.get('http://f.code-on.be/d/19/04/owners.json')
-        .then(
-            response => (
-              this.$store.state.userList = response.data
-              
-            )
-
-        )
-        .catch(function() {
-        }.bind(this));
-        // this.$store.commit('createTasks', {newTasks: this.taskList});
-        // axios.get('http://f.code-on.be/d/19/04/owners.json')
-        //     .then(
-        //         response => (
-        //           console.log(response.data)
-                  
-        //         )
-
-        //     )
-        //     .catch(function() {
-        //     }.bind(this))
-       
-                
   }
 };
 </script>
 
 <style lang="scss">
-    table{
-    border: 1px solid #000;
-    border-collapse: collapse;
-      th{
-      background: #42b983;
+  .home{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    &__content{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  table{
+  border: 1px solid #000;
+  border-collapse: collapse;
+  transition: 1s;
+    thead,
+    tbody,
+    th,
+    td{
       padding: 4px 10px;
+      transition: 1s;
+      transition: 0.5s;
+      width: 100%;
+      &:first-child{
+        width: 0;
+        white-space: nowrap;
+      }
+    }
+    th{
+      background: #42b983;
       border: 1px solid #fff;
       color: #fff;
     }
-      td{
-      padding: 4px 10px;
+    td{
       border: 1px solid #fff;
       &.error-bg{
         background: #ff5722;

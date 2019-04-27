@@ -1,6 +1,6 @@
 <template lang="pug">
   tr.task-row
-    td
+    td(v-if="!onlyCompleted")
       input(type="checkbox" v-model="task.completed")
     td
       |{{task.title}}
@@ -18,17 +18,14 @@
 export default {
   name: 'task-row',
   props: {
-    task: Object
-  },
-  data() {
-    return {
-    }
+    task: Object,
+    onlyCompleted: false,
   },
   computed: {
     userList() {
       return this.$store.state.userList 
     }
-  },
+  }
 };
 </script>
 
